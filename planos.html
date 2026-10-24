@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Reforma Certa — Planos e Preços</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg:        #0e1626;
+        --card:      #101b2e;
+        --surface:   #152035;
+        --border:    #1e2e47;
+        --brand:     #ff7a00;
+        --brand-fg:  #ffffff;
+        --positive:  #2fbf7a;
+        --fg:        #eef2f8;
+        --muted:     #8a9ab5;
+        --display:   'Sora', sans-serif;
+        --body:      'Manrope', sans-serif;
+        --mono:      'Space Mono', monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--body);
+        font-size: 13px;
+        line-height: 1.5;
+        padding: 48px 52px;
+        width: 960px;
+      }
+
+      /* ── cabeçalho ── */
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border);
+      }
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .logo-wrap img {
+        width: 52px;
+        height: 52px;
+        object-fit: cover;
+      }
+      .logo-name {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 22px;
+        letter-spacing: -0.04em;
+        color: var(--fg);
+      }
+      .logo-sub {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+      .doc-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-align: right;
+      }
+
+      /* ── título ── */
+      .hero {
+        margin-bottom: 36px;
+      }
+      .hero h1 {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 34px;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        color: var(--fg);
+        margin-bottom: 10px;
+      }
+      .hero p {
+        font-size: 14px;
+        color: var(--muted);
+        max-width: 560px;
+        line-height: 1.6;
+      }
+
+      /* ── grade de planos ── */
+      .plans {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+      .plan {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .plan.hero-plan {
+        border-color: var(--brand);
+        background: #141f38;
+      }
+      .plan-badge {
+        display: inline-block;
+        background: var(--brand);
+        color: var(--brand-fg);
+        font-family: var(--mono);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 100px;
+        margin-bottom: 14px;
+        align-self: flex-start;
+      }
+      .plan-name {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 20px;
+        letter-spacing: -0.03em;
+        color: var(--fg);
+        margin-bottom: 4px;
+      }
+      .plan-desc {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+      .price-row {
+        margin-bottom: 6px;
+      }
+      .price-month {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 36px;
+        letter-spacing: -0.04em;
+        color: var(--fg);
+      }
+      .price-label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-left: 4px;
+      }
+      .price-annual {
+        font-size: 11px;
+        color: var(--positive);
+        margin-bottom: 24px;
+        font-weight: 600;
+      }
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin-bottom: 20px;
+      }
+      .feature-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+      }
+      .feature-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 12.5px;
+        line-height: 1.4;
+        color: var(--fg);
+      }
+      .feature-list li .ic {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        margin-top: 1px;
+      }
+      .feature-list li.disabled {
+        color: var(--muted);
+        opacity: 0.55;
+      }
+      .highlight {
+        background: var(--surface);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .highlight-num {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 28px;
+        letter-spacing: -0.04em;
+        color: var(--brand);
+        line-height: 1;
+      }
+      .highlight-label {
+        font-size: 11.5px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* ── tabela comparativa ── */
+      .section-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.03em;
+        color: var(--fg);
+        margin-bottom: 16px;
+      }
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        font-size: 12.5px;
+      }
+      .compare-table th {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: -0.02em;
+        padding: 12px 16px;
+        text-align: left;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .compare-table th:first-child { width: 38%; }
+      .compare-table th.hero-col { color: var(--brand); }
+      .compare-table td {
+        padding: 11px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--fg);
+        vertical-align: middle;
+      }
+      .compare-table td.feat { color: var(--muted); font-size: 12px; }
+      .compare-table td.center { text-align: center; }
+      .compare-table tr:last-child td { border-bottom: none; }
+      .compare-table tr:hover td { background: #131e35; }
+      .check { color: var(--positive); font-size: 15px; }
+      .dash  { color: var(--border);   font-size: 15px; }
+
+      /* ── notas ── */
+      .notes {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-bottom: 40px;
+      }
+      .notes h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: -0.02em;
+        color: var(--fg);
+        margin-bottom: 14px;
+      }
+      .notes ol {
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .notes li {
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.55;
+      }
+      .notes li strong { color: var(--fg); }
+
+      /* ── rodapé ── */
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+      footer span {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      @media print {
+        body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="logo-wrap">
+        <img src="../instagram/perfil-principal.png" alt="Reforma Certa" />
+        <div>
+          <div class="logo-name">Reforma Certa</div>
+          <div class="logo-sub">Engenharia e Construção</div>
+        </div>
+      </div>
+      <div class="doc-label">
+        Planos e Preços<br />
+        Versão 1.0 · Outubro 2026
+      </div>
+    </header>
+
+    <div class="hero">
+      <h1>Planos e Preços</h1>
+      <p>Três planos para prestadores em estágios diferentes. Todos incluem PDF com a sua logo, link de aprovação para o cliente e comparativo orçado × realizado.</p>
+    </div>
+
+    <!-- cards dos planos -->
+    <div class="plans">
+
+      <!-- Inicial -->
+      <div class="plan">
+        <div class="plan-name">Inicial</div>
+        <div class="plan-desc">Para o prestador que está deixando o papel e quer fechar mais serviços.</div>
+        <div class="highlight">
+          <div class="highlight-num">15</div>
+          <div class="highlight-label">orçamentos<br />por mês</div>
+        </div>
+        <div class="price-row">
+          <span class="price-month">R$&nbsp;47</span>
+          <span class="price-label">/mês</span>
+        </div>
+        <div class="price-annual">R$ 397/ano &nbsp;·&nbsp; economia de R$ 167</div>
+        <div class="divider"></div>
+        <ul class="feature-list">
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            PDF com logo e CNPJ do prestador
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Link de aprovação para o cliente
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Orçado × realizado
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Histórico de preços: 6 meses
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            1 usuário
+          </li>
+          <li class="disabled">
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#1e2e47" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="#1e2e47" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Relatório de margem
+          </li>
+          <li class="disabled">
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#1e2e47" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="#1e2e47" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Exportação CSV
+          </li>
+        </ul>
+      </div>
+
+      <!-- Profissional (hero) -->
+      <div class="plan hero-plan">
+        <div class="plan-badge">Mais popular</div>
+        <div class="plan-name">Profissional</div>
+        <div class="plan-desc">Para o empreiteiro ativo que quer saber a margem de cada obra.</div>
+        <div class="highlight">
+          <div class="highlight-num">50</div>
+          <div class="highlight-label">orçamentos<br />por mês</div>
+        </div>
+        <div class="price-row">
+          <span class="price-month">R$&nbsp;97</span>
+          <span class="price-label">/mês</span>
+        </div>
+        <div class="price-annual">R$ 817/ano &nbsp;·&nbsp; economia de R$ 347</div>
+        <div class="divider"></div>
+        <ul class="feature-list">
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Tudo do Inicial
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Histórico de preços ilimitado
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Relatório de margem por obra
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Exportação CSV
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            1 usuário
+          </li>
+          <li class="disabled">
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#1e2e47" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="#1e2e47" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Múltiplos usuários
+          </li>
+          <li class="disabled">
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#1e2e47" stroke-width="1.2"/><path d="M5.5 10.5l5-5M10.5 10.5l-5-5" stroke="#1e2e47" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Suporte prioritário
+          </li>
+        </ul>
+      </div>
+
+      <!-- Empresa -->
+      <div class="plan">
+        <div class="plan-name">Empresa</div>
+        <div class="plan-desc">Para a construtora com equipe que precisa delegar sem perder controle.</div>
+        <div class="highlight">
+          <div class="highlight-num">∞</div>
+          <div class="highlight-label">orçamentos<br />ilimitados</div>
+        </div>
+        <div class="price-row">
+          <span class="price-month">R$&nbsp;197</span>
+          <span class="price-label">/mês</span>
+        </div>
+        <div class="price-annual">R$ 1.657/ano &nbsp;·&nbsp; economia de R$ 707</div>
+        <div class="divider"></div>
+        <ul class="feature-list">
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Tudo do Profissional
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Até 5 usuários
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Orçamentos ilimitados
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Relatórios consolidados por equipe
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Suporte prioritário
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Histórico de preços ilimitado
+          </li>
+          <li>
+            <svg class="ic" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#2fbf7a" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#2fbf7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Exportação CSV
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /plans -->
+
+    <!-- tabela comparativa -->
+    <div class="section-title">Comparativo completo</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Inicial<br /><span style="font-family:var(--body);font-weight:600;color:var(--fg);font-size:13px">R$ 47/mês</span></th>
+          <th class="hero-col">Profissional<br /><span style="font-family:var(--body);font-weight:600;color:var(--fg);font-size:13px">R$ 97/mês</span></th>
+          <th>Empresa<br /><span style="font-family:var(--body);font-weight:600;color:var(--fg);font-size:13px">R$ 197/mês</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feat">Orçamentos/mês</td>
+          <td class="center">15</td>
+          <td class="center">50</td>
+          <td class="center">Ilimitado</td>
+        </tr>
+        <tr>
+          <td class="feat">Usuários</td>
+          <td class="center">1</td>
+          <td class="center">1</td>
+          <td class="center">5</td>
+        </tr>
+        <tr>
+          <td class="feat">PDF com logo e CNPJ do prestador</td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Link de aprovação para o cliente</td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Descrição de obra por voz</td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Preço com origem (histórico · base · SINAPI)</td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Orçado × realizado por obra</td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Histórico de preços</td>
+          <td class="center">6 meses</td>
+          <td class="center">Ilimitado</td>
+          <td class="center">Ilimitado</td>
+        </tr>
+        <tr>
+          <td class="feat">Relatório de margem por obra</td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Exportação CSV</td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="check">✓</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Relatório consolidado por equipe</td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Suporte prioritário</td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="dash">—</span></td>
+          <td class="center"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="feat">Preço anual (−30%)</td>
+          <td class="center">R$ 397</td>
+          <td class="center">R$ 817</td>
+          <td class="center">R$ 1.657</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- notas -->
+    <div class="notes">
+      <h3>Pontos de decisão</h3>
+      <ol>
+        <li><strong>Trial de 14 dias com Profissional completo</strong> — o prestador fecha um orçamento real antes de pagar. Converte melhor do que freemium para esse público.</li>
+        <li><strong>O comparativo orçado × realizado está em todos os planos</strong> — é o diferencial mais forte do produto. Tirar do Inicial enfraquece o argumento de venda.</li>
+        <li><strong>Desconto anual de 30%</strong> (≈ 8,5 meses de mensalidade) — antecipa caixa para o negócio e reduz o preço percebido para o cliente.</li>
+        <li><strong>Custo de IA por orçamento é ~R$ 0,04</strong> (Whisper + Gemini via OpenRouter). Mesmo 100 orçamentos/mês custam ~R$ 4 em IA — o pricing é guiado por valor, não por custo.</li>
+      </ol>
+    </div>
+
+    <footer>
+      <span>Reforma Certa · app.reformacerta.com</span>
+      <span>Documento interno · v1.0 · Outubro 2026</span>
+    </footer>
+
+  </body>
+</html>
